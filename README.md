@@ -3,7 +3,7 @@
 * **Contribution Number:** 1 
 * **Student:** Jay Rana  
 * **Issue:** [Add compatibility test for `$stdDevSamp`](https://github.com/documentdb/functional-tests/issues/197)
-* **Status:** Phase I
+* **Status:** Phase II
 
 ---
 
@@ -19,19 +19,20 @@ This also will be my first issue/contribution, thus I will be learning how to re
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+There is no bug or error. The main problem/issue is that currently the expression $stdDevSamp only has a smoke test, it doesn't have actual test cases that test the operator and it's edge cases. 
+
 
 ### Expected Behavior
 
-[What should happen?]
+There should be test cases that test for functonality. For us that means there should be test cases that pass with MongoDB as the DB engine. 
 
 ### Current Behavior
 
-[What actually happens?]
+Currently only the smoke tests run. No other test cases are present to test functonlaity and edge cases of the operator.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+The only affected component/files are in `documentdb_tests/compatibility/tests/core/operator/expressions/accumulator/stdDevSamp/` in which we will create files for the test cases.
 
 ---
 
@@ -39,19 +40,21 @@ This also will be my first issue/contribution, thus I will be learning how to re
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+When setting up the main issue I faced was that my WSL was brining up errors after updating Docker after a really long time of it just being idle. However, the fix was really simple and everything worked smoothly after restarting WSL. After this I just had to follow the documentation for installing MongoDB on Docker and installing the the dev-requirements. 
+
+**Working Branch:** https://github.com/Jhr-4/functional-tests/tree/feature/stddevsamp-second-pass
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Run MongoDB in the background on Docker using: `docker run -d -p 27017:27017 --name mongo-test mongo:latest`
+2. Run the test cases using: `pytest --connection-string mongodb://localhost:27017 --engine-name mongodb ./documentdb_tests/compatibility/tests/core/operator/expressions/accumulator/stdDevSamp/ -v`
+3. There's only one test case that runs which is the smoke test which doesn't do the actual functionality and edge case testing.
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+- **Commit showing reproduction:** https://github.com/Jhr-4/functional-tests/commit/1f76b70f2a15143c18e57e9d0b5de3894f83c2b1
+- **Screenshots/logs:** ![Screenshot showing tests.](./image.png)
+- **My findings:** Basically currently there are no functional tests, only some tests.
 
 ---
 
@@ -59,30 +62,30 @@ This also will be my first issue/contribution, thus I will be learning how to re
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+There is not error or bug. The issue is that there are no test cases for stdDevPop currently that test for edge cases of the operator that may throw an error. 
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+Will create a new file for test cases that test the expression throughly.  
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** $stdDevSamp needs test cases that check for edge cases.
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** Currently there are many other issues too regaring tests for oppoarators. However, it seems like none of the testing of the other opporators has been done yet. I will mostly be following the example for testing for $divide that was provided in the documentation.
 
-**Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+**Plan:** 
+1. Create a new file for test cases.
+2. Add tests for regular usability, all data types including ones that should be errors or valid, datatype mismatches, test for null returns, check for double/Decimal128. Esecnially I will follow the documentation and the testing guidlines/checklist layed out at: https://github.com/documentdb/functional-tests/blob/main/docs/testing/TEST_COVERAGE.md.
+3. Check for sucess and passing of test cases with MongoDB, submit a pull request, itterate if something is missing, etc.
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** 
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:** I will follow the checklist provided here in the [main repo]( https://github.com/documentdb/functional-tests/blob/main/docs/testing/TEST_COVERAGE.md). I will ensure all points are hit and self review.
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** Ensure all my tests pass. Make sure all the points in the contibution doc are followed. There is no other way to evaluate really besides creating the PR and getting feedback from the repo maintainers.
 
 ---
 
