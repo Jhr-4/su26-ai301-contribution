@@ -93,9 +93,11 @@ Using UMPIRE framework (adapted):
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+This is a quick summary of files that were added for unit tests as this issue is about adding unit tests.
+
+- Test cases 1: Added tests for core functionality testing things like different inputs it takes and what it returns, rules such as if N is less than 2
+- Test cases 2: Added tests for non numerical values and ensuring they are ignored
+- Test cases 3: Added tests for infinity and NaN cases ensuring output is correct.
 
 ### Integration Tests
 
@@ -104,15 +106,35 @@ Using UMPIRE framework (adapted):
 
 ### Manual Testing
 
-[What you tested manually and results]
+Manual testing includes using python to verify the values written in test cases:
+```python
+import statistics
+statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
+```
 
 ---
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week 3 Progress
 
+
+**What I built:**
+- Added core tests, infinity case tests, NaN tests, and non-numerical value tests 
 [What you built this week, challenges faced, decisions made]
+
+**Challenges faced:**
+- Initially I had no clue on what I was doing, what is required, formatting, what exact tests are needed, thus:
+    - Read through documention and learned what exactly is needed for test cases
+    - Watched videos on how pytest works 
+    - Created a plan to split the test cases into multiple file listing exactly what tests need to be done
+- Initally commit messages were done with "" so $ was seen as a variable. Had to reword commit messages, caused all commits to be on same day/time.
+
+**Commits this week:**
+- 357b8c8: Add $stdDevSamp core tests 
+- 7531837: Add $stdDevSamp infinity tests
+- af0badf: Add $stdDevSamp non-numeric tests
+- 197a1d3: Reorganize NaN and infinity tests into special value tests
 
 ### Week [Y] Progress
 
@@ -120,8 +142,9 @@ Using UMPIRE framework (adapted):
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
+- **Files modified:** N/A
+- **Files Created:** test_expression_stdDevSamp_core.py, test_expression_stdDevSamp_non_numeric.py, test_expression_stdDevSamp_special_values.py
+- **Key commits:** [Core + NaN Tests](https://github.com/documentdb/functional-tests/commit/357b8c8eec22b9451648b1953d51eb1ccd09c4f5), [Infinity Tests](https://github.com/documentdb/functional-tests/commit/7531837646507c776a39a62a3d17a8648349b055), [Non-Numerical Tests](https://github.com/documentdb/functional-tests/commit/af0badfdfec0d80e31948dfd6673b92b3e9260e2)
 - **Approach decisions:** [Why you chose certain approaches]
 
 ---
@@ -157,7 +180,7 @@ Using UMPIRE framework (adapted):
 ---
 
 ## Resources Used
-
+- [YouTube - pytest Tutorial](https://www.youtube.com/watch?v=cHYq1MRoyI0)
 - [Link to helpful documentation]
 - [Tutorial or Stack Overflow post that helped]
 - [GitHub issues or discussions that helped]
