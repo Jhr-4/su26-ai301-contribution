@@ -181,6 +181,7 @@ statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
 
 ## Resources Used
 - [YouTube - pytest Tutorial](https://www.youtube.com/watch?v=cHYq1MRoyI0)
+- [Official Documentation for stdDevSamp](https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevSamp/)
 - [Link to helpful documentation]
 - [Tutorial or Stack Overflow post that helped]
 - [GitHub issues or discussions that helped]
