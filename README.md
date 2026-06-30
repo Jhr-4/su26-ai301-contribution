@@ -3,7 +3,7 @@
 * **Contribution Number:** 1 
 * **Student:** Jay Rana  
 * **Issue:** [Add compatibility test for `$stdDevSamp`](https://github.com/documentdb/functional-tests/issues/197)
-* **Status:** Phase II
+* **Status:** Phase IV
 
 ---
 
@@ -62,7 +62,7 @@ When setting up the main issue I faced was that my WSL was brining up errors aft
 
 ### Analysis
 
-There is not error or bug. The issue is that there are no test cases for stdDevPop currently that test for edge cases of the operator that may throw an error. 
+There is not error or bug. The issue is that there are no test cases for stdDevSamp currently that test for edge cases of the operator that may throw an error. 
 
 ### Proposed Solution
 
@@ -98,6 +98,8 @@ This is a quick summary of files that were added for unit tests as this issue is
 - Test cases 1: Added tests for core functionality testing things like different inputs it takes and what it returns, rules such as if N is less than 2
 - Test cases 2: Added tests for non numerical values and ensuring they are ignored
 - Test cases 3: Added tests for infinity and NaN cases ensuring output is correct.
+- Test cases 4: Added tests for input fields / arguments they are accepted correctly.
+- Test cases 5: Added tests for boundaries testing they are computed similar to MongoDB.
 
 ### Integration Tests
 
@@ -112,6 +114,22 @@ import statistics
 statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
 ```
 
+Additionally, using MongoDB's shell. 
+```bash
+docker exec -it mongo-test mongosh #starting the shell
+use test #using the db
+db.test.insertOne({ dummy: true }) #adding a document (one time thing)
+#actual test:
+db.test.aggregate([ 
+  {
+    $project: {
+      result: {
+        $stdDevSamp: [vlaues, values, values]
+      }
+    }
+  }
+])
+```
 ---
 
 ## Implementation Notes
@@ -121,7 +139,6 @@ statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
 
 **What I built:**
 - Added core tests, infinity case tests, NaN tests, and non-numerical value tests 
-[What you built this week, challenges faced, decisions made]
 
 **Challenges faced:**
 - Initially I had no clue on what I was doing, what is required, formatting, what exact tests are needed, thus:
@@ -136,30 +153,43 @@ statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
 - af0badf: Add $stdDevSamp non-numeric tests
 - 197a1d3: Reorganize NaN and infinity tests into special value tests
 
-### Week [Y] Progress
+### Week 4 Progress
 
-[Continue documenting as you work]
+
+**What I built:**
+- Added different input form tests, null/missing tests, boundary tests, and added additional tests in previous files to make more comprehensive like floating points. Submitted PR.
+
+**Challenges faced:**
+- One major problem I faced was that tests were failing. Tests were giving different behvaior compared to what I calculated with Python. The solution was to use MongoDB shell to test things. This allowed for more accurate results and gave insight into rounding that MongoDB does when things are very small and are indistinguishable. 
+
+**Commits this week:**
+- c281c3c: Add $stdDevSamp null and missing tests 
+- addd1ec: Add test file for $stdDevSamp input form tests
+- 2569520: Add additional fractional core tests
+- dfbbee9: Add $stdDevSamp boundary tests
+- 2ee2223: Add $stdDevSamp non-numeric bool case 
+- c35cd08: Fix null tests typo + add 2 more cases
 
 ### Code Changes
 
 - **Files modified:** N/A
-- **Files Created:** test_expression_stdDevSamp_core.py, test_expression_stdDevSamp_non_numeric.py, test_expression_stdDevSamp_special_values.py
-- **Key commits:** [Core + NaN Tests](https://github.com/documentdb/functional-tests/commit/357b8c8eec22b9451648b1953d51eb1ccd09c4f5), [Infinity Tests](https://github.com/documentdb/functional-tests/commit/7531837646507c776a39a62a3d17a8648349b055), [Non-Numerical Tests](https://github.com/documentdb/functional-tests/commit/af0badfdfec0d80e31948dfd6673b92b3e9260e2)
+- **Files Created:** test_expression_stdDevSamp_core.py, test_expression_stdDevSamp_non_numeric.py, test_expression_stdDevSamp_special_values.py, test_expression_stdDevSamp_input_forms.py, test_expression_stdDevSamp_null_missing.py, test_expression_stdDevSamp_boundaries.py
+- **Key commits:** [Core + NaN Tests](https://github.com/documentdb/functional-tests/commit/357b8c8eec22b9451648b1953d51eb1ccd09c4f5), [Infinity Tests](https://github.com/documentdb/functional-tests/commit/7531837646507c776a39a62a3d17a8648349b055), [Non-Numerical Tests](https://github.com/documentdb/functional-tests/commit/af0badfdfec0d80e31948dfd6673b92b3e9260e2), [NULL + Missing Tests](https://github.com/documentdb/functional-tests/pull/661/commits/c281c3cedaad4accb81334c37dca53b999e74977), [Input Forms](https://github.com/documentdb/functional-tests/pull/661/commits/addd1ec57d86de927ae5699ac091d4cf36e0b99b), [Boundary Tests](https://github.com/documentdb/functional-tests/pull/661/commits/dfbbee9381861c3fa5971f18cca9de6f4ed58b72)
 - **Approach decisions:** [Why you chose certain approaches]
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/documentdb/functional-tests/pull/661
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
+**PR Description:** Add compatibility test coverage for $stdDevSamp expression operator covering core, boundary, type validation, null/missing cases.
 
 **Maintainer Feedback:**
 - [Date]: [Summary of feedback received]
 - [Date]: [How you addressed it]
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** Awaiting Review + Reviewing Copilot's comment.
 
 ---
 
@@ -167,15 +197,15 @@ statistics.stdev([x, y, ... z]) #where x to z are supposed to be numbers
 
 ### Technical Skills Gained
 
-[What you learned technically]
+The main thing I learned was reading documentation and working with pytest. I learned how to read contibution guidelines, see exactly whats expected, and then actually work on it. On top of this, I gained knowledge on how to actually use Pytest writing parameterized tests.
 
 ### Challenges Overcome
 
-[What was hard and how you solved it]
+The setup was the hardest part. Getting to know how to actually work with Docker's MongoDB container, what is expected, what tests are needed. After figuring out the 'how' things work, it was pretty easy to actually get things done. I also figured out other people were also writing tests and I used it as a base to start.
 
 ### What I'd Do Differently Next Time
 
-[Reflection on your process]
+I would like to spend more time on reading the documentation and more time understanding what exactly is needed. I found some parts to be alittle undetailed and I should of asked questions in the actual issue page.
 
 ---
 
