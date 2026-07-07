@@ -24,11 +24,11 @@ The main problem/issue is that currently the expression $stdDevSamp only has a s
 
 ### Expected Behavior
 
-There should be test cases that test for functonality. For us that means there should be test cases that pass with MongoDB as the DB engine. 
+There should be test cases that test for functionality. For us that means there should be test cases that pass with MongoDB as the DB engine. 
 
 ### Current Behavior
 
-Currently only the smoke tests run. No other test cases are present to test functonlaity and edge cases of the operator.
+Currently only the smoke tests run. No other test cases are present to test functionality and edge cases of the operator.
 
 ### Affected Components
 
@@ -66,7 +66,7 @@ There is not error or bug. The issue is that there are no test cases for stdDevS
 
 ### Proposed Solution
 
-Will create a new file for test cases that test the expression throughly.  
+Will create a new file for test cases that test the expression thoroughly.  
 
 ### Implementation Plan
 
@@ -74,18 +74,18 @@ Using UMPIRE framework (adapted):
 
 **Understand:** $stdDevSamp needs test cases that check for edge cases.
 
-**Match:** Currently there are many other issues too regaring tests for oppoarators. However, it seems like many of the testing of the other opporators have not been done yet. I will mostly be following the example for testing for $divide that was provided in the documentation and the actual tests in the [repo](https://github.com/documentdb/functional-tests/blob/main/documentdb_tests/compatibility/tests/core/operator/expressions/arithmetic/divide/test_operator_divide.py). Additonally, there are a few other done like sum in the same parent folder.  
+**Match:** Currently there are many other issues too regarding tests for operators. However, it seems like many of the testing of the other operators have not been done yet. I will mostly be following the example for testing for $divide that was provided in the documentation and the actual tests in the [repo](https://github.com/documentdb/functional-tests/blob/main/documentdb_tests/compatibility/tests/core/operator/expressions/arithmetic/divide/test_operator_divide.py). Additionally, there are a few other done like sum in the same parent folder.  
 
 **Plan:** 
 1. Create a new file for test cases.
-2. Add tests for regular usability, all data types including ones that should be errors or valid, datatype mismatches, test for null returns, check for double/Decimal128. Esecnially I will follow the documentation and the testing guidlines/checklist layed out at: https://github.com/documentdb/functional-tests/blob/main/docs/testing/TEST_COVERAGE.md.
-3. Check for sucess and passing of test cases with MongoDB, submit a pull request, itterate if something is missing, etc.
+2. Add tests for regular usability, all data types including ones that should be errors or valid, datatype mismatches, test for null returns, check for double/Decimal128. Essentially I will follow the documentation and the testing guidelines/checklist laid out at: https://github.com/documentdb/functional-tests/blob/main/docs/testing/TEST_COVERAGE.md.
+3. Check for success and passing of test cases with MongoDB, submit a pull request, iterate if something is missing, etc.
 
 **Implement:** 
 
 **Review:** I will follow the checklist provided here in the [main repo]( https://github.com/documentdb/functional-tests/blob/main/docs/testing/TEST_COVERAGE.md). I will ensure all points are hit and self review.
 
-**Evaluate:** Ensure all my tests pass. Make sure all the points in the contibution doc are followed. There is no other way to evaluate really besides creating the PR and getting feedback from the repo maintainers.
+**Evaluate:** Ensure all my tests pass. Make sure all the points in the contribution doc are followed. There is no other way to evaluate really besides creating the PR and getting feedback from the repo maintainers.
 
 ---
 
@@ -124,7 +124,7 @@ db.test.aggregate([
   {
     $project: {
       result: {
-        $stdDevSamp: [vlaues, values, values]
+        $stdDevSamp: [values, values, values]
       }
     }
   }
@@ -142,10 +142,10 @@ db.test.aggregate([
 
 **Challenges faced:**
 - Initially I had no clue on what I was doing, what is required, formatting, what exact tests are needed, thus the solution was:
-    - Read through documention and learned what exactly is needed for test cases
+    - Read through documentation and learned what exactly is needed for test cases
     - Watched videos on how pytest works 
     - Created a plan to split the test cases into multiple file listing exactly what tests need to be done
-- Initally commit messages were done with "" so $ was seen as a variable. Had to reword commit messages, caused all commits to be on same day/time.
+- Initially commit messages were done with "" so $ was seen as a variable. Had to reword commit messages, caused all commits to be on same day/time.
 
 **Commits this week:**
 - 357b8c8: Add $stdDevSamp core tests 
@@ -160,7 +160,7 @@ db.test.aggregate([
 - Added different input form tests, null/missing tests, boundary tests, and added additional tests in previous files to make more comprehensive like floating points. Submitted PR.
 
 **Challenges faced:**
-- One major problem I faced was that tests were failing. Tests were giving different behvaior compared to what I calculated with Python. The solution was to use MongoDB shell to test things. This allowed for more accurate results and gave insight into rounding that MongoDB does when things are very small and are indistinguishable. 
+- One major problem I faced was that tests were failing. Tests were giving different behavior compared to what I calculated with Python. The solution was to use MongoDB shell to test things. This allowed for more accurate results and gave insight into rounding that MongoDB does when things are very small and are indistinguishable. 
 
 **Commits this week:**
 - c281c3c: Add $stdDevSamp null and missing tests 
@@ -176,7 +176,7 @@ db.test.aggregate([
 - This week there was nothing built. Typos and corrections were made.
 
 **Challenges faced:**
-- One challenge was faced with the copilot ai reivew that appears with the pull request. It created a change, but this change was not accepted as it didn't have a valid signature on the commit. It also made the commit message that isn't aligned with the requirement of present tense. The solution was to pull the changes locally and go back to the commit and reword it. Rewroding it automatically added a signature and then force pushed the commit.
+- One challenge was faced with the copilot ai review that appears with the pull request. It created a change, but this change was not accepted as it didn't have a valid signature on the commit. It also made the commit message that isn't aligned with the requirement of present tense. The solution was to pull the changes locally and go back to the commit and reword it. Rewording it automatically added a signature and then force pushed the commit.
 
 **Commits this week:**
 - 0883bcc: Fix typo and add explicit is `not None` check
@@ -203,7 +203,7 @@ db.test.aggregate([
 
 **Maintainer Feedback:**
 - 6/30/26: Copilot review stated the MISSING tests that I have don't make sense as MISSING isn't a value, it's an concept of being missing. It can't be added into an array. There were also typos to fix in some messages that were left.
-- 6/30/26: I removed the tests with MISSING used as a vlue. Also updated the typos in the messages.
+- 6/30/26: I removed the tests with MISSING used as a value. Also updated the typos in the messages.
 
 **Status:** Awaiting Review from Maintainers.
 
@@ -213,7 +213,7 @@ db.test.aggregate([
 
 ### Technical Skills Gained
 
-The main thing I learned was reading documentation and working with pytest. I learned how to read contibution guidelines, see exactly whats expected, and then actually work on it. On top of this, I gained knowledge on how to actually use Pytest writing parameterized tests.
+The main thing I learned was reading documentation and working with pytest. I learned how to read contribution guidelines, see exactly whats expected, and then actually work on it. On top of this, I gained knowledge on how to actually use Pytest writing parameterized tests.
 
 ### Challenges Overcome
 
@@ -221,7 +221,7 @@ The setup was the hardest part. Getting to know how to actually work with Docker
 
 ### What I'd Do Differently Next Time
 
-I would like to spend more time on reading the documentation and more time understanding what exactly is needed. I found some parts to be alittle undetailed and I should of asked questions in the actual issue page.
+I would like to spend more time on reading the documentation and more time understanding what exactly is needed. I found some parts to be a little under detailed and I should of asked questions in the actual issue page.
 
 ---
 
@@ -231,26 +231,28 @@ I would like to spend more time on reading the documentation and more time under
 
 
 ## Note to grader:
-* Please reevlaute Phase 1:
-  * Problem summary was present initially, but was given 0 points. Now it's clearly labled.
+* Please reevaluate Phase 1:
+  * Problem summary was present initially, but was given 0 points. Now it's clearly ladled.
   * Bonus was also done talking about $divide example, now it's actually linked.
-  * Acceptance checklist was also linked going to the contibution repo. 
-* Please reevaluvate Phase 2: 
-  * "Plan identifies a root cause (not just a symptom) and names specific files to modify" there was no broken logic. The whole idea of the issue was to add test cases. Please don't peanlize for something the issue doesn't cover.
+  * Acceptance checklist was also linked going to the contribution repo. 
+* Please reevaluate Phase 2: 
+  * "Plan identifies a root cause (not just a symptom) and names specific files to modify" there was no broken logic. The whole idea of the issue was to add test cases. Please don't penalize for something the issue doesn't cover.
   * Celebration on slack added.
-* Please reevaluvate Phase 3: 
+* Please reevaluate Phase 3: 
   * Challenges & problems were always mentioned.
   * Bonus, edge case of N<2 was never mentioned, it was added by myself.
   * Test cases passing proof added. 'after.png'
   * Celebration on slack added.
-* Please reevaluvate Phase 4: 
+* Please reevaluate Phase 4: 
   * Now PR uses the project's PR template
   * 'Why' before 'what' - description is provided on why changes are needed.
   * There's no acceptance criteria in the given format given by the rep's CONTRIBUTION.md. Besides all tests passing and all tests being included.
   * Added Maintainer Feedback of copilot.
+  * Added proof of "PR was visibly surfaced to maintainers"
+  ![Reivew](./review.png)
   * Celebration on slack added.
 
 Check-In on courses.codepath.org for each week has been submitted before hard deadline. Not sure why grading sheet gives 0 points for each.
 
-**Note:** Please fix instructions if 'slack celebration' is going to be graded. Make it required. No point in saying "Recomended" on courses website.
+**Note:** Please fix instructions if 'slack celebration' is going to be graded. Make it required. No point in saying "Recommended" on courses website, indicating not required.
 > "#dts-su26-ai301-celebration in Slack (recommended)"
