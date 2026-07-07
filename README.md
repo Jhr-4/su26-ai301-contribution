@@ -250,6 +250,7 @@ I would like to spend more time on reading the documentation and more time under
   * Added Maintainer Feedback of copilot.
   * Celebration on slack added.
 
+Check-In on courses.codepath.org for each week has been submitted before hard deadline. Not sure why grading sheet gives 0 points for each.
 
 **Note:** Please fix instructions if 'slack celebration' is going to be graded. Make it required. No point in saying "Recomended" on courses website.
 > "#dts-su26-ai301-celebration in Slack (recommended)"
