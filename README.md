@@ -191,7 +191,7 @@ db.test.aggregate([
 - **Key commits:** [Core + NaN Tests](https://github.com/documentdb/functional-tests/commit/357b8c8eec22b9451648b1953d51eb1ccd09c4f5), [Infinity Tests](https://github.com/documentdb/functional-tests/commit/7531837646507c776a39a62a3d17a8648349b055), [Non-Numerical Tests](https://github.com/documentdb/functional-tests/commit/af0badfdfec0d80e31948dfd6673b92b3e9260e2), [NULL + Missing Tests](https://github.com/documentdb/functional-tests/pull/661/commits/c281c3cedaad4accb81334c37dca53b999e74977), [Input Forms](https://github.com/documentdb/functional-tests/pull/661/commits/addd1ec57d86de927ae5699ac091d4cf36e0b99b), [Boundary Tests](https://github.com/documentdb/functional-tests/pull/661/commits/dfbbee9381861c3fa5971f18cca9de6f4ed58b72)
 - **Approach decisions:** [Why you chose certain approaches]
 
-[Screenshot showing tests after.](./after.png)
+![Screenshot showing tests after.](./after.png)
 
 ---
 
