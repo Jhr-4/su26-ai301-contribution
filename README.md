@@ -237,12 +237,19 @@ I would like to spend more time on reading the documentation and more time under
   * Acceptance checklist was also linked going to the contibution repo. 
 * Please reevaluvate Phase 2: 
   * "Plan identifies a root cause (not just a symptom) and names specific files to modify" there was no broken logic. The whole idea of the issue was to add test cases. Please don't peanlize for something the issue doesn't cover.
+  * Celebration on slack added.
 * Please reevaluvate Phase 3: 
   * Challenges & problems were always mentioned.
   * Bonus, edge case of N<2 was never mentioned, it was added by myself.
   * Test cases passing proof added. 'after.png'
+  * Celebration on slack added.
 * Please reevaluvate Phase 4: 
   * Now PR uses the project's PR template
   * 'Why' before 'what' - description is provided on why changes are needed.
   * There's no acceptance criteria in the given format given by the rep's CONTRIBUTION.md. Besides all tests passing and all tests being included.
   * Added Maintainer Feedback of copilot.
+  * Celebration on slack added.
+
+
+**Note:** Please fix instructions if 'slack celebration' is going to be graded. Make it required. No point in saying "Recomended" on courses website.
+> "#dts-su26-ai301-celebration in Slack (recommended)"
