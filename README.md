@@ -17,9 +17,9 @@ This also will be my first issue/contribution, thus I will be learning how to re
 
 ## Understanding the Issue
 
-### Problem Description
+### Problem Description (Problem Summary)
 
-There is no bug or error. The main problem/issue is that currently the expression $stdDevSamp only has a smoke test, it doesn't have actual test cases that test the operator and it's edge cases. 
+The main problem/issue is that currently the expression $stdDevSamp only has a smoke test, it doesn't have actual test cases that test the operator and it's edge cases. Thus, it is really important to add compatibility testing to ensure the function matches what what is expected in MongoDB.
 
 
 ### Expected Behavior
@@ -53,7 +53,7 @@ When setting up the main issue I faced was that my WSL was brining up errors aft
 ### Reproduction Evidence
 
 - **Commit showing reproduction:** https://github.com/Jhr-4/functional-tests/commit/1f76b70f2a15143c18e57e9d0b5de3894f83c2b1
-- **Screenshots/logs:** ![Screenshot showing tests.](./image.png)
+- **Screenshots/logs:** ![Screenshot showing tests.](./before.png)
 - **My findings:** Basically currently there are no functional tests, only some tests.
 
 ---
@@ -74,7 +74,7 @@ Using UMPIRE framework (adapted):
 
 **Understand:** $stdDevSamp needs test cases that check for edge cases.
 
-**Match:** Currently there are many other issues too regaring tests for oppoarators. However, it seems like none of the testing of the other opporators has been done yet. I will mostly be following the example for testing for $divide that was provided in the documentation.
+**Match:** Currently there are many other issues too regaring tests for oppoarators. However, it seems like many of the testing of the other opporators have not been done yet. I will mostly be following the example for testing for $divide that was provided in the documentation and the actual tests in the [repo](https://github.com/documentdb/functional-tests/blob/main/documentdb_tests/compatibility/tests/core/operator/expressions/arithmetic/divide/test_operator_divide.py). Additonally, there are a few other done like sum in the same parent folder.  
 
 **Plan:** 
 1. Create a new file for test cases.
@@ -141,7 +141,7 @@ db.test.aggregate([
 - Added core tests, infinity case tests, NaN tests, and non-numerical value tests 
 
 **Challenges faced:**
-- Initially I had no clue on what I was doing, what is required, formatting, what exact tests are needed, thus:
+- Initially I had no clue on what I was doing, what is required, formatting, what exact tests are needed, thus the solution was:
     - Read through documention and learned what exactly is needed for test cases
     - Watched videos on how pytest works 
     - Created a plan to split the test cases into multiple file listing exactly what tests need to be done
@@ -170,12 +170,28 @@ db.test.aggregate([
 - 2ee2223: Add $stdDevSamp non-numeric bool case 
 - c35cd08: Fix null tests typo + add 2 more cases
 
+### Week 5 Progress
+
+**What I built:**
+- This week there was nothing built. Typos and corrections were made.
+
+**Challenges faced:**
+- One challenge was faced with the copilot ai reivew that appears with the pull request. It created a change, but this change was not accepted as it didn't have a valid signature on the commit. It also made the commit message that isn't aligned with the requirement of present tense. The solution was to pull the changes locally and go back to the commit and reword it. Rewroding it automatically added a signature and then force pushed the commit.
+
+**Commits this week:**
+- 0883bcc: Fix typo and add explicit is `not None` check
+- e5162ca: Fix $stdDevSamp missing handling and test messages
+
+
+
 ### Code Changes
 
 - **Files modified:** N/A
 - **Files Created:** test_expression_stdDevSamp_core.py, test_expression_stdDevSamp_non_numeric.py, test_expression_stdDevSamp_special_values.py, test_expression_stdDevSamp_input_forms.py, test_expression_stdDevSamp_null_missing.py, test_expression_stdDevSamp_boundaries.py
 - **Key commits:** [Core + NaN Tests](https://github.com/documentdb/functional-tests/commit/357b8c8eec22b9451648b1953d51eb1ccd09c4f5), [Infinity Tests](https://github.com/documentdb/functional-tests/commit/7531837646507c776a39a62a3d17a8648349b055), [Non-Numerical Tests](https://github.com/documentdb/functional-tests/commit/af0badfdfec0d80e31948dfd6673b92b3e9260e2), [NULL + Missing Tests](https://github.com/documentdb/functional-tests/pull/661/commits/c281c3cedaad4accb81334c37dca53b999e74977), [Input Forms](https://github.com/documentdb/functional-tests/pull/661/commits/addd1ec57d86de927ae5699ac091d4cf36e0b99b), [Boundary Tests](https://github.com/documentdb/functional-tests/pull/661/commits/dfbbee9381861c3fa5971f18cca9de6f4ed58b72)
 - **Approach decisions:** [Why you chose certain approaches]
+
+[Screenshot showing tests after.](./after.png)
 
 ---
 
@@ -186,10 +202,10 @@ db.test.aggregate([
 **PR Description:** Add compatibility test coverage for $stdDevSamp expression operator covering core, boundary, type validation, null/missing cases.
 
 **Maintainer Feedback:**
-- [Date]: [Summary of feedback received]
-- [Date]: [How you addressed it]
+- 6/30/26: Copilot review stated the MISSING tests that I have don't make sense as MISSING isn't a value, it's an concept of being missing. It can't be added into an array. There were also typos to fix in some messages that were left.
+- 6/30/26: I removed the tests with MISSING used as a vlue. Also updated the typos in the messages.
 
-**Status:** Awaiting Review + Reviewing Copilot's comment.
+**Status:** Awaiting Review from Maintainers.
 
 ---
 
@@ -212,6 +228,21 @@ I would like to spend more time on reading the documentation and more time under
 ## Resources Used
 - [YouTube - pytest Tutorial](https://www.youtube.com/watch?v=cHYq1MRoyI0)
 - [Official Documentation for stdDevSamp](https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevSamp/)
-- [Link to helpful documentation]
-- [Tutorial or Stack Overflow post that helped]
-- [GitHub issues or discussions that helped]
+
+
+## Note to grader:
+* Please reevlaute Phase 1:
+  * Problem summary was present initially, but was given 0 points. Now it's clearly labled.
+  * Bonus was also done talking about $divide example, now it's actually linked.
+  * Acceptance checklist was also linked going to the contibution repo. 
+* Please reevaluvate Phase 2: 
+  * "Plan identifies a root cause (not just a symptom) and names specific files to modify" there was no broken logic. The whole idea of the issue was to add test cases. Please don't peanlize for something the issue doesn't cover.
+* Please reevaluvate Phase 3: 
+  * Challenges & problems were always mentioned.
+  * Bonus, edge case of N<2 was never mentioned, it was added by myself.
+  * Test cases passing proof added. 'after.png'
+* Please reevaluvate Phase 4: 
+  * Now PR uses the project's PR template
+  * 'Why' before 'what' - description is provided on why changes are needed.
+  * There's no acceptance criteria in the given format given by the rep's CONTRIBUTION.md. Besides all tests passing and all tests being included.
+  * Added Maintainer Feedback of copilot.
